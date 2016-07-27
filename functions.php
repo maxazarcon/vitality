@@ -7,6 +7,34 @@ function vitality_menu() {
 }
 add_action( 'init', 'vitality_menu' );
 
+// Register Custom Post Types
+
+function vitality_custom_post_type() {
+	register_post_type( 'vitality_section',
+		array(
+			'labels' => array(
+				'name' => __( 'Sections' ),
+				'singular_name' => __( 'Section' ),
+				'add_new_item' => __( 'Add Section' ),
+				'edit_item' => __( 'Edit Section' ),
+				'all_items' => __( 'All Sections' )
+			),
+			'public' => true,
+			'has_archive' =>true,
+			'supports' => array(
+				'title',
+				'editor',
+				'page-attributes',
+				'revisions'
+			),
+			'exclude_from_search' => false,
+			'capability_type' => 'post',
+			'rewrite' => array( 'slug' => 'sections' ),
+		)
+	);
+}
+add_action( 'init', 'vitality_custom_post_type' );
+
 // Enqueue Header Scripts
 
 function vitality_header_scripts() {
